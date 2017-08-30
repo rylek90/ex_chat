@@ -1,6 +1,6 @@
 defmodule ExChatChannel do
   use ExUnit.Case
-  alias ExChat.Channel
+  alias ExChat.{Channel, Message}
 
   setup do
     Channel.start()
@@ -17,6 +17,12 @@ defmodule ExChatChannel do
     Channel.join(:member_one)
     Channel.join(:member_one)
     assert MapSet.equal?(Channel.get_members, MapSet.new([:member_one]))
+  end
+
+  test "should send only properly formatted messages" do
+    assert_raise FunctionClauseError, fn ->
+      Channel.send_message("some message")
+    end
   end
 
 end
