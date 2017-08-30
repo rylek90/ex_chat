@@ -1,18 +1,18 @@
 defmodule ExChat do
-  @moduledoc """
-  Documentation for ExChat.
-  """
 
-  @doc """
-  Hello world.
+  alias ExChat.{Channel, Member}
 
-  ## Examples
+  def test do
+    Channel.start()
 
-      iex> ExChat.hello
-      :world
+    Member.start(:jan)
+    Member.start(:pawel)
 
-  """
-  def hello do
-    :world
+    Channel.join(:jan)
+    Channel.join(:pawel)
+
+    Member.send_message(:jan, "Jestem papiezem")
+    Member.send_message(:pawel, "A nie, bo ja")
+
   end
 end
